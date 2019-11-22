@@ -3,7 +3,11 @@
         "psr-4": {
             "Source\\": "source/",
             "Core\\": "source/core",
-            "Tables\\": "source/tables"
+            "Tables\\": "source/tables",
+            "Models\\": "source/models",
+            "Views\\": "source/views",
+            "Controllers": "source/controllers"
+
         }
     },
     "name": "fabio/assessment",
