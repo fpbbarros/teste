@@ -1,0 +1,26 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/",
+            "Core\\": "source/core",
+            "Tables\\": "source/tables"
+        }
+    },
+    "name": "fabio/assessment",
+    "description": "",
+    "authors": [
+        {
+            "name": "Fábio Pereira Barros",
+            "email": "fpbbarros@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/routing": "^5.0",
+        "symfony/http-foundation": "^5.0",
+        "illuminate/events": "^6.5",
+        "symfony/http-kernel": "^5.0",
+        "doctrine/dbal": "^2.10",
+        "hashids/hashids": "^4.0",
+        "illuminate/database": "^6.5"
+    }
+}
