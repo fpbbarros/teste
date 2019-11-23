@@ -3,6 +3,7 @@
 namespace Models;
 
 use Core\Connection;
+use Helpers\UILogger;
 
 class Category
 {
@@ -46,14 +47,14 @@ class Category
   }
 
   //verificacao
-  public static function validate(array $input): bool
+  public static function validate(array $data): bool
   {
     $validation = true;
-    if (isset($input['name']) && strlen($input['name']) < 1) {
+    if (isset($data['name']) && strlen($data['name']) < 1) {
       UILogger::in('invalid name!', 2);
       $validation = false;
     }
-    if (isset($input['code']) && strlen($input['code']) < 1) {
+    if (isset($data['code']) && strlen($data['code']) < 1) {
       UILogger::in('invalid code!', 2);
       $validation = false;
     }
@@ -62,15 +63,15 @@ class Category
 
 
   //crud
-  public static function insert(array $input): int
+  public static function insert(array $data): int
   {
-    if (self::byName($input['name']) != 0 || self::byCode($input['code']) != 0) {
+    if (self::byName($data['name']) != 0 || self::byCode($data['code']) != 0) {
       return false;
     }
-    if (!self::validate(($input))) {
+    if (!self::validate(($data))) {
       return false;
     }
-    if ($id = Connection::table('category')->insertGetId(['name' => $input['name'], 'code' => $input['code']])) {
+    if ($id = Connection::table('category')->insertGetId(['name' => $data['name'], 'code' => $data['code']])) {
       UILogger::in('Registered category', 1);
       return $id;
     }

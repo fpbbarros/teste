@@ -6,7 +6,8 @@
             "Tables\\": "source/tables",
             "Models\\": "source/models",
             "Views\\": "source/views",
-            "Controllers": "source/controllers"
+            "Controllers": "source/controllers",
+            "Helpers\\" : "source/helpers"
 
         }
     },
