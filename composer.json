@@ -7,8 +7,8 @@
             "Models\\": "source/models",
             "Views\\": "source/views",
             "Controllers": "source/controllers",
-            "Helpers\\" : "source/helpers"
-
+            "Helpers\\": "source/helpers",
+            "Interfaces\\": "source/interfaces"
         }
     },
     "name": "fabio/assessment",

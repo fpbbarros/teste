@@ -2,6 +2,8 @@
 
 namespace Helpers;
 
+use Interfaces\ILogger;
+
 class UILogger implements ILogger
 {
 
