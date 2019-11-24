@@ -1,6 +1,6 @@
 <?php
 
-define(BASE_URL, "http://localhost/assessment");
+define("BASE_URL", "http://localhost/assessment");
 
 define("SITE", "WebJump");
 

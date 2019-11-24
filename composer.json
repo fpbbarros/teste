@@ -6,17 +6,23 @@
             "Tables\\": "source/tables",
             "Models\\": "source/models",
             "Views\\": "source/views",
-            "Controllers": "source/controllers",
             "Helpers\\": "source/helpers",
-            "Interfaces\\": "source/interfaces"
+            "Interfaces\\": "source/interfaces",
+            "Controllers\\": "source/controllers"
+
+
         }
+    },
+    "config": {
+        "vendor-dir": "vendor"
     },
     "name": "fabio/assessment",
     "description": "",
     "authors": [
         {
             "name": "Fábio Pereira Barros",
-            "email": "fpbbarros@gmail.com"
+            "email": "fpbbarros@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
