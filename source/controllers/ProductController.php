@@ -7,9 +7,9 @@ use Models\Product;
 
 class ProductController
 {
-  public static function get(int $id = null)
+  public static function get(int $data = null)
   {
-    return ObjToJson::objToJson(Product::byId($id));
+    return ObjToJson::objToJson(Product::byId($data));
   }
 
   public static function insert(array $data)
