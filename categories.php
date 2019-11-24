@@ -1,8 +1,8 @@
 <!doctype html>
-<html ⚡>
+<html lang="pt-BR">
 
 <head>
-  <title>Webjump | Backend Test | Dashboard</title>
+  <title>Webjump | Backend Test | Categories</title>
   <meta charset="utf-8">
 
   <link rel="stylesheet" type="text/css" media="all" href="assets/css/style.css" />
@@ -106,70 +106,66 @@
   </div>
 </header>
 <!-- Header -->
-<!-- Main Content -->
-<main class="content">
-  <div class="header-list-page">
-    <h1 class="title">Dashboard</h1>
-  </div>
-  <div class="infor">
 
-    <?php
+<body>
+  <!-- Main Content -->
+  <main class="content">
+    <div class="header-list-page">
+      <h1 class="title">Categories</h1>
 
- 
-    ?>
+      <?php require __DIR__ . "/log.php"; ?>
 
-    You have 4 products added on this store: <a href="newProduct.php" class="btn-action">Add new Product</a>
+      <a href="newCategory.php" class="btn-action">Add new Category</a>
+    </div>
+    <table class="data-grid">
+      <thead>
+        <tr class="data-row">
+          <th class="data-grid-th">
+            <span class="data-grid-cell-content">Name</span>
+          </th>
+          <th class="data-grid-th">
+            <span class="data-grid-cell-content">Code</span>
+          </th>
+          <th class="data-grid-th">
+            <span class="data-grid-cell-content">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="table">
+      </tbody>
+    </table>
+  </main>
+  <!-- Main Content -->
 
-  </div>
-  <ul class="product-list" id="products">
-    <span id="loading"></span>
-  </ul>
-</main>
-<!-- Main Content -->
-
-<!-- Footer -->
-<footer>
-  <div class="footer-image">
-    <img src="assets/images/go-jumpers.png" width="119" height="26" alt="Go Jumpers" />
-  </div>
-  <div class="email-content">
-    <span>go@jumpers.com.br</span>
-  </div>
-</footer>
-<!-- Footer -->
-
-
-
-<script>
-  
-</script>
-
-<script>
-  axios.get('local/index.php/product', {})
-    .then(function(response) {
-      $("#loading").html('Carregando...');
-      console.log(response.data);
-      var full = "";
-      response.data.forEach(function(obj) {
-
-        full = full + "<li>";
-        full = full + "<div class='product-image'>";
-        full = full + "<img src='images/product/tenis-runner-bolt.png' layout='responsive' width='164' height='145' alt='Tênis Runner Bolt' />"
-        full = full + "</div>";
-        full = full + "<div class='product-info'>"
-        full = full + "<div class='product-name'><span>" + obj.name + "</span></div>";
-        full = full + "<div class='product-price'><span class='special-price'>" + obj.quantity + " disponíveis</span> <span>R$" + obj.price + "</span></div>";
-        full = full + "</div>";
-        full = full + "</li>";
+  <!-- Footer -->
+  <footer>
+    <div class="footer-image">
+      <img src="assets/images/go-jumpers.png" width="119" height="26" alt="Go Jumpers" />
+    </div>
+    <div class="email-content">
+      <span>go@jumpers.com.br</span>
+    </div>
+  </footer>
+  <script>
+    axios.get('public/index.php/category', {})
+      .then(function(response) {
+        $("#table").html('Carregando...');
+        console.log(response.data);
+        var full = "";
+        response.data.forEach(function(obj) {
+          full = full + "<tr class='data-row'>";
+          full = full + "<td class='data-grid-td'><span class='data-grid-cell-content'>" + obj.name + "</span></td>";
+          full = full + "<td class='data-grid-td'><span class='data-grid-cell-content'>" + obj.code + "</span></td>";
+          full = full + "<td class='data-grid-td'><div class='actions'><div class='action edit'><a href='updateCategory.php?id=" + obj.id + "'><span>Edit</span></a></div>";
+          full = full + "<div class='action delete'><a href='public/index.php/category/delete/" + obj.id + "'><span>Delete</span></div></div></div></td></tr>";
+        });
+        $("#table").html(full);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-      $("#loading").html('');
-      $("#products").html(full);
-      var_dump(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-</script>
+  </script>
+  <!-- Footer -->
 </body>
 
 </html>
