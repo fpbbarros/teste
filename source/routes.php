@@ -38,6 +38,8 @@ $router->add('/product/delete/{id}', function ($id) {
 /** Routes Categories */
 
 $router->add('/category', function () {
+  var_dump("aqui");
+  LOG_ALERT('aqui');
   return new Response(CategoryController::get());
 });
 
