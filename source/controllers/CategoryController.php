@@ -7,9 +7,9 @@ use Models\Category;
 
 class CategoryController
 {
-  public static function get(int $data = null)
+  public static function get(int $id = null)
   {
-    return ObjToJson::objToJson(Category::byId($data));
+    return ObjToJson::objToJson(Category::get($id));
   }
 
   public static function insert(array $data)

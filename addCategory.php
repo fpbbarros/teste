@@ -1,7 +1,8 @@
+
 <!doctype html>
 <html ⚡>
 <head>
-  <title>Webjump | Backend Test | Dashboard</title>
+  <title>Webjump | Backend Test | Add Category</title>
   <meta charset="utf-8">
 
 <link  rel="stylesheet" type="text/css"  media="all" href="assets/css/style.css" />
@@ -40,15 +41,21 @@
 <!-- Header -->
   <!-- Main Content -->
   <main class="content">
-    <div class="header-list-page">
-      <h1 class="title">Dashboard</h1>
-    </div>
-    <div class="infor">
-      You have 4 products added on this store: <a href="addProduct.php" class="btn-action">Add new Product</a>
-    </div>
-    <ul class="product-list" id="products">
-      <span id="loading"></span>
-    </ul>
+    <h1 class="title new-item">New Category</h1>
+    <form method="post" action="public/index.php/category/insert">
+      <div class="input-field">
+        <label for="category-name" class="label">Category Name</label>
+        <input type="text" id="category-name" class="input-text" name="category[name]" required/>
+      </div>
+      <div class="input-field">
+        <label for="category-code" class="label">Category Code</label>
+        <input type="text" id="category-code" class="input-text" name="category[code]" required />
+      </div>
+      <div class="actions-form">
+        <a href="categories.php" class="action back">Back</a>
+        <input class="btn-submit btn-action"  type="submit" value="Save" />
+      </div>
+    </form>
   </main>
   <!-- Main Content -->
 
@@ -62,30 +69,5 @@
 	</div>
 </footer>
  <!-- Footer -->
- <script>
-    axios.get('public/index.php/product', {})
-  .then(function (response) {
-    $("#loading").html('Carregando...');
-    console.log(response.data);
-    var full = "";
-    response.data.forEach(function(obj){
-      full = full + "<li>";
-      full = full + "<div class='product-image'>";
-      full = full + "<img src='images/product/tenis-runner-bolt.png' layout='responsive' width='164' height='145' alt='Tênis Runner Bolt' />"
-      full = full + "</div>";
-      full = full + "<div class='product-info'>"
-      full = full + "<div class='product-name'><span>"+obj.name+"</span></div>";
-      full = full + "<div class='product-price'><span class='special-price'>"+obj.quantity+" disponíveis</span> <span>R$"+obj.price+"</span></div>";
-      full = full + "</div>";
-      full = full + "</li>";
-    });
-    $("#loading").html('');
-    $("#products").html(full);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-</script>
 </body>
 </html>
-

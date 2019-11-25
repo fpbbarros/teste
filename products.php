@@ -1,7 +1,8 @@
+
 <!doctype html>
 <html ⚡>
 <head>
-  <title>Webjump | Backend Test | Dashboard</title>
+  <title>Webjump | Backend Test | Products</title>
   <meta charset="utf-8">
 
 <link  rel="stylesheet" type="text/css"  media="all" href="assets/css/style.css" />
@@ -37,18 +38,41 @@
     <span class="go-title">Administration Panel</span>
   </div>    
 </header>  
-<!-- Header -->
+<!-- Header --><body>
   <!-- Main Content -->
   <main class="content">
     <div class="header-list-page">
-      <h1 class="title">Dashboard</h1>
+      <h1 class="title">Products</h1>
+      <?php require __DIR__ . "/log.php";
+      ?>
+      <a href="addProduct.php" class="btn-action">Add new Product</a>
     </div>
-    <div class="infor">
-      You have 4 products added on this store: <a href="addProduct.php" class="btn-action">Add new Product</a>
-    </div>
-    <ul class="product-list" id="products">
-      <span id="loading"></span>
-    </ul>
+    <span id="loading"></span>
+    <table class="data-grid">
+      <tr class="data-row">
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Name</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">SKU</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Price</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Quantity</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Categories</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Actions</span>
+        </th>
+      </tr>
+      <tbody id="table">
+        
+      </tbody>
+    </table>
   </main>
   <!-- Main Content -->
 
@@ -62,25 +86,49 @@
 	</div>
 </footer>
  <!-- Footer -->
- <script>
+<script>
     axios.get('public/index.php/product', {})
   .then(function (response) {
     $("#loading").html('Carregando...');
     console.log(response.data);
     var full = "";
     response.data.forEach(function(obj){
-      full = full + "<li>";
-      full = full + "<div class='product-image'>";
-      full = full + "<img src='images/product/tenis-runner-bolt.png' layout='responsive' width='164' height='145' alt='Tênis Runner Bolt' />"
+      full = full + "<tr class='data-row'>";
+      full = full + "<td class='data-grid-td'>";
+      full = full + "<span class='data-grid-cell-content'>"+obj.name+"</span>";
+      full = full + "</td>";
+      full = full + "<td class='data-grid-td'>";
+      full = full + "<span class='data-grid-cell-content'>"+obj.sku+"</span>";
+      full = full + "</td>";
+      full = full + "<td class='data-grid-td'>";
+      full = full + "<span class='data-grid-cell-content'>"+obj.price+"</span>";
+      full = full + "</td>";
+      full = full + "<td class='data-grid-td'>";
+      full = full + "<span class='data-grid-cell-content'>"+obj.quantity+"</span>";
+      full = full + "</td>";
+      full = full + "<td class='data-grid-td'>";
+      full = full + "<span class='data-grid-cell-content'>";
+      if (obj.categories) {
+        obj.categories.forEach(function(cat){
+          full = full + " "+cat.name+" ";
+        });
+      }
+      full = full + "</span>";
+      full = full + "</td>";
+      full = full + "<td class='data-grid-td'>";
+      full = full + "<div class='actions'>";
+      full = full + "<div class='action edit'>";
+      full = full + "<a href='updateProduct.php?id="+obj.id+"'><span>Edit</span></a>";
       full = full + "</div>";
-      full = full + "<div class='product-info'>"
-      full = full + "<div class='product-name'><span>"+obj.name+"</span></div>";
-      full = full + "<div class='product-price'><span class='special-price'>"+obj.quantity+" disponíveis</span> <span>R$"+obj.price+"</span></div>";
+      full = full + "<div class='action delete'>";
+      full = full + "<a href='public/index.php/product/delete/"+obj.id+"'><span>Delete</span></a>";
       full = full + "</div>";
-      full = full + "</li>";
+      full = full + "</div>";
+      full = full + "</td>";
+      full = full + "</tr>";
     });
     $("#loading").html('');
-    $("#products").html(full);
+    $("#table").html(full);
   })
   .catch(function (error) {
     console.log(error);
@@ -88,4 +136,3 @@
 </script>
 </body>
 </html>
-

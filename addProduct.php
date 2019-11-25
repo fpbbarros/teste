@@ -1,7 +1,8 @@
+
 <!doctype html>
 <html ⚡>
 <head>
-  <title>Webjump | Backend Test | Dashboard</title>
+  <title>Webjump | Backend Test | Add Product</title>
   <meta charset="utf-8">
 
 <link  rel="stylesheet" type="text/css"  media="all" href="assets/css/style.css" />
@@ -40,15 +41,40 @@
 <!-- Header -->
   <!-- Main Content -->
   <main class="content">
-    <div class="header-list-page">
-      <h1 class="title">Dashboard</h1>
-    </div>
-    <div class="infor">
-      You have 4 products added on this store: <a href="addProduct.php" class="btn-action">Add new Product</a>
-    </div>
-    <ul class="product-list" id="products">
-      <span id="loading"></span>
-    </ul>
+    <h1 class="title new-item">New Product</h1>
+    <form method="post" action="public/index.php/product/insert">
+      <div class="input-field">
+        <label for="sku" class="label">Product SKU</label>
+        <input type="text" id="sku" class="input-text" name="product[sku]" required /> 
+      </div>
+      <div class="input-field">
+        <label for="name" class="label">Product Name</label>
+        <input type="text" id="name" class="input-text" name="product[name]" required/> 
+      </div>
+      <div class="input-field">
+        <label for="price" class="label">Price</label>
+        <input type="text" id="price" class="input-text" name="product[price]" required/> 
+      </div>
+      <div class="input-field">
+        <label for="quantity" class="label">Quantity</label>
+        <input type="text" id="quantity" class="input-text" name="product[quantity]" required /> 
+      </div>
+      <div class="input-field">
+        <label for="category" class="label">Categories</label>
+        <span id=loading></span>
+        <select multiple id="category" class="input-text" name="product[categories][]" required>
+        </select>
+      </div>
+      <div class="input-field">
+        <label for="description" class="label">Description</label>
+        <textarea id="description" class="input-text" name="product[description]" required></textarea>
+      </div>
+      <div class="actions-form">
+        <a href="products.php" class="action back">Back</a>
+        <input class="btn-submit btn-action" type="submit" value="Save Product" />
+      </div>
+      
+    </form>
   </main>
   <!-- Main Content -->
 
@@ -62,30 +88,21 @@
 	</div>
 </footer>
  <!-- Footer -->
- <script>
-    axios.get('public/index.php/product', {})
+</body>
+<script>
+  axios.get('public/index.php/category', {})
   .then(function (response) {
     $("#loading").html('Carregando...');
     console.log(response.data);
     var full = "";
     response.data.forEach(function(obj){
-      full = full + "<li>";
-      full = full + "<div class='product-image'>";
-      full = full + "<img src='images/product/tenis-runner-bolt.png' layout='responsive' width='164' height='145' alt='Tênis Runner Bolt' />"
-      full = full + "</div>";
-      full = full + "<div class='product-info'>"
-      full = full + "<div class='product-name'><span>"+obj.name+"</span></div>";
-      full = full + "<div class='product-price'><span class='special-price'>"+obj.quantity+" disponíveis</span> <span>R$"+obj.price+"</span></div>";
-      full = full + "</div>";
-      full = full + "</li>";
+      full = full + "<option value='"+obj.id+"'>"+obj.name+"</option>";
     });
-    $("#loading").html('');
-    $("#products").html(full);
+    $("#category").html(full);
+    $("#loading").html("");
   })
   .catch(function (error) {
     console.log(error);
   });
 </script>
-</body>
 </html>
-

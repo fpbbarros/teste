@@ -7,7 +7,7 @@ define("SITE", "WebJump");
 define(DATABASE, [
   'DRIVE'     => 'mysql',
   'HOST'      => 'localhost',
-  'NAME'      => 'desafio',
+  'NAME'      => 'datalayer',
   'USER'      => 'root',
   'PASS'      => '',
   'CHARSET'   => 'utf8',

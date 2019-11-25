@@ -11,6 +11,8 @@ class Category
   //busca
   public static function get(int $id = null, string $code = null)
   {
+
+    
     if (!is_null($code)) {
       return Connection::table('category')->select('*')->where('code', $code)->get();
     }
